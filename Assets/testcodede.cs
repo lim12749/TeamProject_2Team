@@ -2,16 +2,11 @@ using UnityEngine;
 
 public class testcodede : MonoBehaviour
 {
-    string test = "집가고싶다.";
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("집가고싶다.");
+        }
     }
 }
