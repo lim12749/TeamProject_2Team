@@ -13,6 +13,7 @@ public class SimpleMover : MonoBehaviour
     [SerializeField] float runSpeed = 6f;
     [SerializeField] float turnSpeed = 720f;
     [SerializeField] bool faceMoveDir = true;
+    public Animator animator;  // 애니메이터(선택)
 
     // 애니메이션 훅(선택)
     public float Speed01 { get; private set; }
@@ -58,6 +59,9 @@ public class SimpleMover : MonoBehaviour
 
         // 4) 이동 (중력 자동 적용)
         cc.SimpleMove(moveDir * targetSpeed);
+
+        animator.SetFloat("Speed", Speed01);
+        animator.SetFloat("Speed", Speed01); // 0~1 값으로 전달
 
         // 5) 회전(이동 방향 바라보기)
         if (faceMoveDir && IsMoving)
