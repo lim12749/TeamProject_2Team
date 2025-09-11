@@ -48,9 +48,11 @@ public class MonsterController_kjh : MonoBehaviour
         // 충돌한 오브젝트의 태그(Tag)가 "Player"인지 확인합니다.
         if (collision.gameObject.CompareTag("Player"))
         {
-            // 충돌한 플레이어 오브젝트를 파괴(삭제)합니다.
-            Destroy(collision.gameObject);
-            Debug.Log("플레이어가 몬스터와 충돌하여 사망했습니다.");
+            if(gamemanager.Instance != null)
+            {
+                gamemanager.Instance.TakeDamage(100);
+            }
+            
         }
     }
 }
