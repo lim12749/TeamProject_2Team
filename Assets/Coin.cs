@@ -29,11 +29,10 @@ public class Coin : MonoBehaviour
         // 플레이어가 근처에 있고, 'E' 키가 눌렸을 때
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            // 플레이어 컨트롤러를 찾아 AddCoin 함수 호출
-            LSH playerController = FindFirstObjectByType<LSH>();
-            if (playerController != null)
+            // GameManager의 정적 인스턴스를 통해 AddCoin 함수 호출
+            if (LSH.instance != null)
             {
-                playerController.AddCoin();
+                LSH.instance.AddCoin();
             }
 
             // 코인 오브젝트 제거
