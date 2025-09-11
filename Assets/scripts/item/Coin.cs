@@ -30,9 +30,9 @@ public class Coin : MonoBehaviour
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
             // GameManager의 정적 인스턴스를 통해 AddCoin 함수 호출
-            if (LSH.instance != null)
+            if (gamemanager.Instance != null)
             {
-                LSH.instance.AddCoin();
+                gamemanager.Instance.AddCoin();
             }
 
             // 코인 오브젝트 제거
