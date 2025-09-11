@@ -42,7 +42,7 @@ public class InputReader : MonoBehaviour
         sprint.started += _ => SprintHeld = true;
         sprint.canceled += _ => SprintHeld = false;
 
-        interact.performed += _ => InteractPressed?.Invoke();
+        // interact.performed += _ => InteractPressed?.Invoke();
         // reload.performed   += _ => ReloadPressed?.Invoke();
     }
 
