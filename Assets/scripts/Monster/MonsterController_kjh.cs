@@ -43,13 +43,14 @@ public class MonsterController_kjh : MonoBehaviour
     }
 
     // 다른 오브젝트와 물리적으로 충돌했을 때 호출됩니다.
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         // 충돌한 오브젝트의 태그(Tag)가 "Player"인지 확인합니다.
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             if(gamemanager.Instance != null)
             {
+                Debug.Log("충돌");
                 gamemanager.Instance.TakeDamage(100);
             }
             
