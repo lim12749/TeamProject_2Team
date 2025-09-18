@@ -6,6 +6,7 @@ public class VolumeUI : MonoBehaviour
     [Header("Sliders (0~1)")]
     [Tooltip("BGM 볼륨 조절용 슬라이더 0 ~ 1 범위")]
     [SerializeField] Slider bgmSlider;
+    [SerializeField] Slider mastarSlider;
 
     [SerializeField] TextMeshProUGUI bgmText;
 
