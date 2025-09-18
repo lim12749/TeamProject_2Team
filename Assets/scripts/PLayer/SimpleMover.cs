@@ -44,8 +44,11 @@ public class SimpleMover : MonoBehaviour
         Vector3 f, r;
         if (cameraRelative && cam)
         {
-            f = cam.forward; f.y = 0f; f.Normalize();
-            r = cam.right; r.y = 0f; r.Normalize();
+            // 카메라의 y축 회전만 사용
+            Vector3 camForward = Quaternion.Euler(0, cam.eulerAngles.y, 0) * Vector3.forward;
+            Vector3 camRight = Quaternion.Euler(0, cam.eulerAngles.y, 0) * Vector3.right;
+            f = camForward.normalized;
+            r = camRight.normalized;
         }
         else
         {
