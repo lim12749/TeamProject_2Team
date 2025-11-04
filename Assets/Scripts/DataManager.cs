@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public enum character
+    public enum Character
     {
-        warrior,
-        soldier
+        knightPlayer,
+        soldierPlayer
     }
     public static DataManager Instance { get; private set; }
     private void Awake()
@@ -21,5 +21,5 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public character CurrentCharacter;
+    public Character CurrentCharacter;
 }
