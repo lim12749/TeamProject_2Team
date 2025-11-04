@@ -1,7 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
 
 public class CharacterSelector : MonoBehaviour
 {
@@ -15,26 +13,54 @@ public class CharacterSelector : MonoBehaviour
     public float transitionSpeed = 5f;
 
     private Vector3 targetScale;
+    private Camera mainCam;
 
     void Start()
     {
-        for(int i = 0; i < chars.Length; i++)
+        mainCam = Camera.main;
+        targetScale = Vector3.one * normalScale;
+
+        // 시작 시 전체 캐릭터 비선택 처리
+        for (int i = 0; i < chars.Length; i++)
         {
             chars[i].OnDeselect();
         }
     }
 
-    private void OnMouseUpAsButton()
+    void Update()
     {
-        DataManager.Instance.CurrentCharacter = character;
-        OnSelect();
-        for(int i = 0; i < chars.Length; i++)
+        HandleClick();
+        SmoothScale();
+    }
+
+    void HandleClick()
+    {
+        if (Input.GetMouseButtonUp(0)) // 좌클릭
         {
-            if (chars[i] != this)
+            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                chars[i].OnDeselect();
+                // 클릭한 오브젝트가 자신일 때
+                if (hit.transform == transform)
+                {
+                    DataManager.Instance.CurrentCharacter = character;
+                    OnSelect();
+
+                    // 다른 캐릭터 비활성화
+                    foreach (var c in chars)
+                    {
+                        if (c != this)
+                            c.OnDeselect();
+                    }
+                }
             }
         }
+    }
+
+    void SmoothScale()
+    {
+        // 부드럽게 스케일 변화
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * transitionSpeed);
     }
 
     public void OnDeselect()
@@ -43,7 +69,9 @@ public class CharacterSelector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainGameScene")
             return;
 
-        floorRenderer.material.color = normalColor;
+        if (floorRenderer != null)
+            floorRenderer.material.color = normalColor;
+
         targetScale = Vector3.one * normalScale;
     }
 
@@ -53,7 +81,9 @@ public class CharacterSelector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainGameScene")
             return;
 
-        floorRenderer.material.color = selectedColor;
+        if (floorRenderer != null)
+            floorRenderer.material.color = selectedColor;
+
         targetScale = Vector3.one * selectedScale;
     }
 }

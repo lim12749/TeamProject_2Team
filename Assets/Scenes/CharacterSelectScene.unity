@@ -1332,6 +1332,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8552850515612750159, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7419194544524534554, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
       propertyPath: floorRenderer
       value: 
