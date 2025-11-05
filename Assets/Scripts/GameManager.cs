@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-<<<<<<< Updated upstream
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -58,31 +57,31 @@ public class GameManager : MonoBehaviour
         if (charPrefabs == null || charPrefabs.Length == 0)
         {
             Debug.LogError("charPrefabsê°€ ë¹„ì–´ìžˆìŒ!");
-=======
-        if (DataManager.Instance == null)
-        {
-            Debug.LogError("DataManager.Instance°¡ ¾ø½À´Ï´Ù! DataManager°¡ ¸ÕÀú ·ÎµåµÇ¾ú´ÂÁö È®ÀÎÇÏ¼¼¿ä.");
-            return;
+
+            if (DataManager.Instance == null)
+            {
+                Debug.LogError("DataManager.Instanceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½! DataManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
+                return;
+            }
+
+            int index = (int)DataManager.Instance.CurrentCharacter;
+
+            if (charPrefabs == null || charPrefabs.Length == 0)
+            {
+                Debug.LogError("charPrefabs ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
+                return;
+            }
+
+            if (index < 0 || index >= charPrefabs.Length)
+            {
+                Debug.LogError($"ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½: {index}");
+                return;
+            }
+
+            Player = Instantiate(charPrefabs[index], Vector3.zero, Quaternion.identity);
+            Player.name = charPrefabs[index].name + "_Player";
+            Player.transform.localScale = Vector3.one;
         }
 
-        int index = (int)DataManager.Instance.CurrentCharacter;
-
-        if (charPrefabs == null || charPrefabs.Length == 0)
-        {
-            Debug.LogError("charPrefabs ¹è¿­ÀÌ ºñ¾ú½À´Ï´Ù!");
-            return;
-        }
-
-        if (index < 0 || index >= charPrefabs.Length)
-        {
-            Debug.LogError($"À¯È¿ÇÏÁö ¾ÊÀº Ä³¸¯ÅÍ ÀÎµ¦½º: {index}");
->>>>>>> Stashed changes
-            return;
-        }
-
-        Player = Instantiate(charPrefabs[index], Vector3.zero, Quaternion.identity);
-        Player.name = charPrefabs[index].name + "_Player";
-        Player.transform.localScale = Vector3.one;
     }
-
 }

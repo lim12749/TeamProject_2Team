@@ -4,14 +4,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMove : MonoBehaviour
 {
-<<<<<<< Updated upstream
     public static PlayerMove Instanse { get; private set; }
     public LayerMask groundLayer; // í´ë¦­ ê°€ëŠ¥í•œ ë°”ë‹¥ ë ˆì´ì–´
     public LayerMask monsterLayer; // ëª¬ìŠ¤í„° ë ˆì´ì–´ ì¶”ê°€
-=======
-    [Header("¹Ù´Ú ·¹ÀÌ¾î")]
+
+    [Header("ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½")]
     public LayerMask groundLayer;
->>>>>>> Stashed changes
 
     private CharacterController controller;
     public Animator animator;
@@ -20,11 +18,6 @@ public class PlayerMove : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMoving = false;
 
-<<<<<<< Updated upstream
-    // ì¤‘ë ¥ ê´€ë ¨ ë³€ìˆ˜
-=======
-    // Áß·Â °ü·Ã º¯¼ö
->>>>>>> Stashed changes
     private Vector3 velocity;
     private float gravity = -9.81f;
     private float groundCheckOffset = 0.2f;
@@ -71,11 +64,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         HandleMouseInput();
-<<<<<<< Updated upstream
-=======
         MoveToTarget();
         ApplyGravity();
->>>>>>> Stashed changes
     }
 
     void HandleMouseInput()
@@ -87,25 +77,21 @@ public class PlayerMove : MonoBehaviour
             {
                 targetPosition = hit.point;
                 isMoving = true;
-<<<<<<< Updated upstream
                 animator.SetBool("isMoving", true);
                 currentTarget = null; // ìˆ˜ë™ ì´ë™ ì‹œ ìžë™ ê³µê²© í•´ì œ
-=======
->>>>>>> Stashed changes
             }
         }
     }
 
     void MoveToTarget()
     {
-<<<<<<< Updated upstream
         if (controller == null)
             Debug.LogError("âŒ CharacterControllerê°€ ì—†ìŒ!");
         if (stats == null)
             Debug.LogError("âŒ CharacterStatsê°€ ì—†ìŒ!");
 
         // ì¤‘ë ¥ ê³„ì‚°
-=======
+
         if (!isMoving)
         {
             animator.SetBool("isMoving", false);
@@ -133,28 +119,23 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateDirectionalAnimation(Vector3 moveDir)
     {
-        // ÇöÀç ¹Ù¶óº¸´Â ¹æÇâ (MonsterDetector°¡ µ¹·ÁÁØ ¹æÇâ)
         Vector3 forward = transform.forward;
         Vector3 right = transform.right;
 
-        // ÀÌµ¿ º¤ÅÍ¸¦ ÇöÀç Ä³¸¯ÅÍ ·ÎÄÃ ±âÁØÀ¸·Î º¯È¯
-        float forwardDot = Vector3.Dot(forward, moveDir.normalized); // ¾ÕµÚ
-        float rightDot = Vector3.Dot(right, moveDir.normalized);     // ÁÂ¿ì
+        float forwardDot = Vector3.Dot(forward, moveDir.normalized); 
+        float rightDot = Vector3.Dot(right, moveDir.normalized);     
 
-        // Blend Tree¿¡ Àü´Þ
         animator.SetFloat("MoveZ", forwardDot);
         animator.SetFloat("MoveX", rightDot);
     }
 
     void ApplyGravity()
     {
->>>>>>> Stashed changes
         if (controller.isGrounded)
             velocity.y = -groundCheckOffset;
         else
             velocity.y += gravity * Time.deltaTime;
 
-<<<<<<< Updated upstream
         if (isMoving)
         {
             Vector3 direction = targetPosition - transform.position;
@@ -176,8 +157,6 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-=======
->>>>>>> Stashed changes
         controller.Move(velocity * Time.deltaTime);
     }
 
