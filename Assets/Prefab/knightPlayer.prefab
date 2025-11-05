@@ -4930,7 +4930,7 @@ GameObject:
   - component: {fileID: -3344620111965304663}
   m_Layer: 6
   m_Name: knightPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5000,7 +5000,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3438521048858770538}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3955de6a24970f840996fe77051507ee, type: 3}
   m_Controller: {fileID: 9100000, guid: c993aff8e2e9c1446972746892a7166c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -5087,9 +5087,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3942f36cc4c4f004e9c5ba4f569f388c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
+  monsterLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
+  detectionRange: 10
+  rotationSpeed: 10
+  MoveX: 0
+  MoveZ: 0
+  isMoving: 0
 --- !u!1 &3451990005710540044
 GameObject:
   m_ObjectHideFlags: 0
