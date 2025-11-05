@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelector : MonoBehaviour
 {
-    public CharacterSelector[] chars;
+    [HideInInspector] public CharacterSelector[] chars;
     public DataManager.Character character;
     public Renderer floorRenderer;
     public Color normalColor = Color.white;
@@ -12,19 +12,22 @@ public class CharacterSelector : MonoBehaviour
     public float selectedScale = 1.2f;
     public float transitionSpeed = 5f;
 
+    private Animator animator;
     private Vector3 targetScale;
     private Camera mainCam;
 
-    void Start()
+    void Awake()
     {
         mainCam = Camera.main;
         targetScale = Vector3.one * normalScale;
+        // animatorë¥¼ ìê¸° ìì‹  ë˜ëŠ” ìì‹ì—ì„œ ìë™ìœ¼ë¡œ ì°¾ìŒ
+        animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
+    }
 
-        // ½ÃÀÛ ½Ã ÀüÃ¼ Ä³¸¯ÅÍ ºñ¼±ÅÃ Ã³¸®
-        for (int i = 0; i < chars.Length; i++)
-        {
-            chars[i].OnDeselect();
-        }
+    void Start()
+    {
+        // ì´ˆê¸° ìƒíƒœëŠ” ë¹„ì„ íƒ(ì•ˆì „í•˜ê²Œ)
+        SafeDeselect();
     }
 
     void Update()
@@ -35,22 +38,25 @@ public class CharacterSelector : MonoBehaviour
 
     void HandleClick()
     {
-        if (Input.GetMouseButtonUp(0)) // ÁÂÅ¬¸¯
+        if (Input.GetMouseButtonUp(0))
         {
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                // Å¬¸¯ÇÑ ¿ÀºêÁ§Æ®°¡ ÀÚ½ÅÀÏ ¶§
-                if (hit.transform == transform)
+                // í´ë¦­í•œ ì˜¤ë¸Œì íŠ¸ê°€ ì´ ìºë¦­í„°(ë£¨íŠ¸)ì¸ì§€ í™•ì¸
+                if (hit.transform == transform || hit.transform.IsChildOf(transform))
                 {
                     DataManager.Instance.CurrentCharacter = character;
                     OnSelect();
 
-                    // ´Ù¸¥ Ä³¸¯ÅÍ ºñÈ°¼ºÈ­
-                    foreach (var c in chars)
+                    // ë‹¤ë¥¸ ìºë¦­í„° ë¹„í™œì„±í™”
+                    if (chars != null)
                     {
-                        if (c != this)
-                            c.OnDeselect();
+                        foreach (var c in chars)
+                        {
+                            if (c != null && c != this)
+                                c.OnDeselect();
+                        }
                     }
                 }
             }
@@ -59,30 +65,50 @@ public class CharacterSelector : MonoBehaviour
 
     void SmoothScale()
     {
-        // ºÎµå·´°Ô ½ºÄÉÀÏ º¯È­
         transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * transitionSpeed);
     }
 
-    public void OnDeselect()
+    // ì•ˆì „ ì´ˆê¸°í™” (ì™¸ë¶€ì—ì„œ í•œ ë²ˆë§Œ í˜¸ì¶œí•´ë„ ì•ˆì „)
+    public void SafeDeselect()
     {
-        // ¸ŞÀÎ °ÔÀÓ ¾ÀÀÌ¸é »ö»ó/½ºÄÉÀÏ º¯°æ ¸·±â
         if (SceneManager.GetActiveScene().name == "MainGameScene")
             return;
 
         if (floorRenderer != null)
-            floorRenderer.material.color = normalColor;
+        {
+            // ëŸ°íƒ€ì„ì— ì”¬ ì˜¤ë¸Œì íŠ¸ë¼ë©´ .material ì•ˆì „, ì—ë””í„°ì—ì„œë§Œ sharedMaterial
+            if (Application.isPlaying)
+                floorRenderer.material.color = normalColor;
+            else
+                floorRenderer.sharedMaterial.color = normalColor;
+        }
+
+        if (animator != null)
+            animator.SetBool("isMoving", false);
 
         targetScale = Vector3.one * normalScale;
     }
 
+    public void OnDeselect()
+    {
+        SafeDeselect();
+    }
+
     public void OnSelect()
     {
-        // ¸ŞÀÎ °ÔÀÓ ¾ÀÀÌ¸é »ö»ó/½ºÄÉÀÏ º¯°æ ¸·±â
         if (SceneManager.GetActiveScene().name == "MainGameScene")
             return;
 
         if (floorRenderer != null)
-            floorRenderer.material.color = selectedColor;
+        {
+            if (Application.isPlaying)
+                floorRenderer.material.color = selectedColor;
+            else
+                floorRenderer.sharedMaterial.color = selectedColor;
+        }
+
+        if (animator != null)
+            animator.SetBool("isMoving", true);
 
         targetScale = Vector3.one * selectedScale;
     }

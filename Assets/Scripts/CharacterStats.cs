@@ -1,10 +1,7 @@
 using UnityEngine;
 
-[System.Serializable]
 public class CharacterStats : MonoBehaviour
 {
-    public static CharacterStats instance { get; private set; }
-
     [Header("기본 정보")]
     public string characterName = "기본 캐릭터";
     public Sprite portrait;

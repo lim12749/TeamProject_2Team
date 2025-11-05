@@ -4928,6 +4928,7 @@ GameObject:
   - component: {fileID: -7419194544524534554}
   - component: {fileID: -8552850515612750159}
   - component: {fileID: -3344620111965304663}
+  - component: {fileID: 8950218930708255970}
   m_Layer: 6
   m_Name: knightPlayer
   m_TagString: Untagged
@@ -5000,11 +5001,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3438521048858770538}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3955de6a24970f840996fe77051507ee, type: 3}
   m_Controller: {fileID: 9100000, guid: c993aff8e2e9c1446972746892a7166c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -5042,14 +5043,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680a0a42a017ccb46bbea94961fed2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chars: []
+  chars:
+  - {fileID: 1885123116662185193, guid: 7c1c5b7bba506f64681cd68dc576821a, type: 3}
+  - {fileID: -7419194544524534554}
   character: 0
-  floorRenderer: {fileID: 0}
+  floorRenderer: {fileID: 5372795486612658126, guid: 87665182b2ac56b4aaef4cc2f5522d11, type: 3}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
   normalScale: 1
   selectedScale: 1.2
   transitionSpeed: 5
+  animator: {fileID: 7815685704151697461}
 --- !u!143 &-8552850515612750159
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5090,6 +5094,29 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  animator: {fileID: 7815685704151697461}
+  attackRange: 5
+  attackCooldown: 1
+--- !u!114 &8950218930708255970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438521048858770538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: "\uAE30\uBCF8 \uCE90\uB9AD\uD130"
+  portrait: {fileID: 0}
+  maxHealth: 100
+  attackPower: 10
+  moveSpeed: 5
 --- !u!1 &3451990005710540044
 GameObject:
   m_ObjectHideFlags: 0

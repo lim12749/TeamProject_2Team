@@ -1,11 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public GameObject[] charPrefabs;
-    public GameObject Player;
+    public GameObject[] charPrefabs; // 0 = knight, 1 = soldier
+    public GameObject Player { get; private set; }
 
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -20,11 +22,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnDestroy()
     {
-        int index = (int)DataManager.Instance.CurrentCharacter;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainGameScene")
+        {
+            SpawnPlayerForGame();
+        }
+    }
+
+    void SpawnPlayerForGame()
+    {
+        if (Player != null) // 이미 스폰되어 있으면 또 안만듦
+            return;
+
+        if (DataManager.Instance == null)
+        {
+            Debug.LogWarning("DataManager가 없음: CurrentCharacter 기본값 사용");
+            // 안전 장치: 인덱스 0 사용
+            InstantiatePlayer(0);
+            return;
+        }
+
+        int index = Mathf.Clamp((int)DataManager.Instance.CurrentCharacter, 0, charPrefabs.Length - 1);
+        InstantiatePlayer(index);
+    }
+
+    void InstantiatePlayer(int index)
+    {
+        if (charPrefabs == null || charPrefabs.Length == 0)
+        {
+            Debug.LogError("charPrefabs가 비어있음!");
+            return;
+        }
+
         Player = Instantiate(charPrefabs[index], Vector3.zero, Quaternion.identity);
-        Player.transform.SetParent(null);
+        Player.name = charPrefabs[index].name + "_Player";
         Player.transform.localScale = Vector3.one;
     }
 }

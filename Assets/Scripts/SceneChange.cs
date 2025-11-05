@@ -14,7 +14,7 @@ public class SceneChange : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded; // 씬 전환 감지
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -27,7 +27,6 @@ public class SceneChange : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // 씬이 로드될 때마다 버튼을 새로 찾아서 연결
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         targetButton = GameObject.Find("Button")?.GetComponent<Button>();

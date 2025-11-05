@@ -1,39 +1,71 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMove : MonoBehaviour
 {
-    public LayerMask groundLayer; // Å¬¸¯ °¡´ÉÇÑ ¹Ù´Ú ·¹ÀÌ¾î
+    public static PlayerMove Instanse { get; private set; }
+    public LayerMask groundLayer; // í´ë¦­ ê°€ëŠ¥í•œ ë°”ë‹¥ ë ˆì´ì–´
+    public LayerMask monsterLayer; // ëª¬ìŠ¤í„° ë ˆì´ì–´ ì¶”ê°€
+
     private CharacterController controller;
-    private Animator animator;
+    public Animator animator;
     private CharacterStats stats;
 
     private Vector3 targetPosition;
     private bool isMoving = false;
 
-    // Áß·Â °ü·Ã º¯¼ö
-    private Vector3 velocity;          // ÇöÀç Áß·Â ¼Óµµ
-    private float gravity = -9.81f;    // Áß·Â °ª (Unity ±âº»°ª)
-    private float groundCheckOffset = 0.2f; // ¹Ù´Ú ±ÙÃ³ ¿ÀÂ÷ ¹üÀ§
+    // ì¤‘ë ¥ ê´€ë ¨ ë³€ìˆ˜
+    private Vector3 velocity;
+    private float gravity = -9.81f;
+    private float groundCheckOffset = 0.2f;
 
+    // ìë™ ê³µê²© ê´€ë ¨ ë³€ìˆ˜
+    public float attackRange = 10f;
+    public float attackCooldown = 1f; // ê³µê²© ê°„ê²©
+    private float lastAttackTime = 0f;
+    private Transform currentTarget;
+
+    private void Awake()
+    {
+        if(Instanse == null)
+            Instanse = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
         stats = GetComponent<CharacterStats>();
 
-        targetPosition = transform.position;
+        // ì„ íƒì”¬ì¼ ë• RootMotion ë„ê¸°
+        if (SceneManager.GetActiveScene().name == "CharacterSelectScene")
+            animator.applyRootMotion = false;
+        else
+            animator.applyRootMotion = false; // CharacterControllerë¡œ ì´ë™í•˜ë‹ˆê¹Œ ê³„ì† false ìœ ì§€
     }
+
 
     void Update()
     {
+        DetectMonster();
+
+        // ê³µê²© ì¤‘ì´ë©´ ì´ë™ ì¤‘ë‹¨
+        if (currentTarget != null && IsTargetInRange())
+        {
+            AttackTarget();
+        }
+        else
+        {
+            MoveToTarget();
+        }
+
         HandleMouseInput();
-        MoveToTarget();
     }
 
     void HandleMouseInput()
     {
-        // ¸¶¿ì½º ¿À¸¥ÂÊ Å¬¸¯
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -42,25 +74,24 @@ public class PlayerMove : MonoBehaviour
                 targetPosition = hit.point;
                 isMoving = true;
                 animator.SetBool("isMoving", true);
+                currentTarget = null; // ìˆ˜ë™ ì´ë™ ì‹œ ìë™ ê³µê²© í•´ì œ
             }
         }
     }
 
     void MoveToTarget()
     {
-        // Áß·Â ¸ÕÀú °è»ê
-        if (controller.isGrounded)
-        {
-            // ¶¥¿¡ ´êÀ¸¸é y ¼Óµµ ¸®¼Â
-            velocity.y = -groundCheckOffset;
-        }
-        else
-        {
-            // Áß·Â Àû¿ë
-            velocity.y += gravity * Time.deltaTime;
-        }
+        if (controller == null)
+            Debug.LogError("âŒ CharacterControllerê°€ ì—†ìŒ!");
+        if (stats == null)
+            Debug.LogError("âŒ CharacterStatsê°€ ì—†ìŒ!");
 
-        // ÀÌµ¿ Ã³¸®
+        // ì¤‘ë ¥ ê³„ì‚°
+        if (controller.isGrounded)
+            velocity.y = -groundCheckOffset;
+        else
+            velocity.y += gravity * Time.deltaTime;
+
         if (isMoving)
         {
             Vector3 direction = targetPosition - transform.position;
@@ -68,23 +99,81 @@ public class PlayerMove : MonoBehaviour
 
             if (direction.magnitude < 0.1f)
             {
-                // µµÂø
                 isMoving = false;
                 animator.SetBool("isMoving", false);
             }
             else
             {
-                // È¸Àü
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
 
-                // ÀÌµ¿
+                // ğŸ’¥ ë¬¸ì œ ìœ„ì¹˜
                 Vector3 move = direction.normalized * stats.moveSpeed;
                 controller.Move(move * Time.deltaTime);
             }
         }
 
-        // Áß·Â Àû¿ë (Ç×»ó ¸¶Áö¸·¿¡ Move)
         controller.Move(velocity * Time.deltaTime);
+    }
+
+
+    void DetectMonster()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange, monsterLayer);
+
+        if (hits.Length > 0)
+        {
+            // ê°€ì¥ ê°€ê¹Œìš´ ëª¬ìŠ¤í„° ì°¾ê¸°
+            float minDistance = Mathf.Infinity;
+            Transform nearest = null;
+
+            foreach (Collider hit in hits)
+            {
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearest = hit.transform;
+                }
+            }
+
+            currentTarget = nearest;
+        }
+        else
+        {
+            currentTarget = null;
+        }
+    }
+
+    bool IsTargetInRange()
+    {
+        if (currentTarget == null) return false;
+        return Vector3.Distance(transform.position, currentTarget.position) <= attackRange;
+    }
+
+    void AttackTarget()
+    {
+        // ëª¬ìŠ¤í„° ë°”ë¼ë³´ê¸°
+        Vector3 lookDir = currentTarget.position - transform.position;
+        lookDir.y = 0f;
+        if (lookDir.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+
+        // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+        if (Time.time - lastAttackTime > attackCooldown)
+        {
+            animator.SetTrigger("Fire"); // UpperBodyLayerì—ì„œ ì‚¬ìš©í•  ê³µê²© íŠ¸ë¦¬ê±°
+            lastAttackTime = Time.time;
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // ê³µê²© ë²”ìœ„ ì‹œê°í™”
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

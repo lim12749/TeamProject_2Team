@@ -868,6 +868,7 @@ GameObject:
   - component: {fileID: 1885123116662185193}
   - component: {fileID: 7050542570285871734}
   - component: {fileID: -4618510065581182872}
+  - component: {fileID: -1873492260837014146}
   m_Layer: 6
   m_Name: soldierPlayer
   m_TagString: Untagged
@@ -910,7 +911,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: dea53afcc07acd64e831c0fde2362639, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -950,12 +951,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chars: []
   character: 0
-  floorRenderer: {fileID: 0}
+  floorRenderer: {fileID: 4865736290420895990, guid: f8569c8e6fa41fa478107c2533669598, type: 3}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
   normalScale: 1
   selectedScale: 1.2
   transitionSpeed: 5
+  animator: {fileID: 3186365682307997882}
 --- !u!143 &7050542570285871734
 CharacterController:
   m_ObjectHideFlags: 0
@@ -996,6 +998,29 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  animator: {fileID: 3186365682307997882}
+  attackRange: 10
+  attackCooldown: 1
+--- !u!114 &-1873492260837014146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248292635177255770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: "\uAE30\uBCF8 \uCE90\uB9AD\uD130"
+  portrait: {fileID: 0}
+  maxHealth: 100
+  attackPower: 10
+  moveSpeed: 5
 --- !u!1 &3645428842138737178
 GameObject:
   m_ObjectHideFlags: 0
