@@ -6,6 +6,7 @@ public class CharacterSelector : MonoBehaviour
     [HideInInspector] public CharacterSelector[] chars;
     public DataManager.Character character;
     public Renderer floorRenderer;
+    public Animator animator;
     public Color normalColor = Color.white;
     public Color selectedColor = Color.red;
     public float normalScale = 1f;
@@ -86,6 +87,8 @@ public class CharacterSelector : MonoBehaviour
         if (animator != null)
             animator.SetBool("isMoving", false);
 
+        animator.SetBool("isMoving", false);
+
         targetScale = Vector3.one * normalScale;
     }
 
@@ -109,6 +112,8 @@ public class CharacterSelector : MonoBehaviour
 
         if (animator != null)
             animator.SetBool("isMoving", true);
+
+        animator.SetBool("isMoving", true);
 
         targetScale = Vector3.one * selectedScale;
     }
