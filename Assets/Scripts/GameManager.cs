@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public GameObject[] charPrefabs; // 0 = knight, 1 = soldier
     public GameObject Player { get; private set; }
 =======
+=======
+>>>>>>> Stashed changes
     public GameObject[] charPrefabs; // 예비 프리팹 배열 (옵션)
     public GameObject Player;
 >>>>>>> Stashed changes
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     private void OnDestroy()
     {
@@ -92,6 +96,10 @@ public class GameManager : MonoBehaviour
 =======
     void Start()
     {
+=======
+    void Start()
+    {
+>>>>>>> Stashed changes
         GameObject prefabToSpawn = null;
 
         // 우선 RuntimeManager의 선택된 프리팹 사용
@@ -150,6 +158,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("GameManager: 소환할 캐릭터 프리팹이 없습니다. RuntimeManager 또는 charPrefabs 를 확인하세요.");
         }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 }

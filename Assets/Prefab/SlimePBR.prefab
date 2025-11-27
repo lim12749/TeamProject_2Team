@@ -407,6 +407,9 @@ GameObject:
   - component: {fileID: -1058511265142236737}
   - component: {fileID: 9119739048435785193}
   - component: {fileID: 1865571866953027663}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_Layer: 8
   m_Name: SlimePBR

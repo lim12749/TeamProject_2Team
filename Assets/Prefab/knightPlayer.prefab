@@ -4927,7 +4927,11 @@ GameObject:
   - component: {fileID: -8552850515612750159}
   - component: {fileID: -3344620111965304663}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - component: {fileID: 8950218930708255970}
+=======
+  - component: {fileID: 8200425390549911959}
+>>>>>>> Stashed changes
 =======
   - component: {fileID: 8200425390549911959}
 >>>>>>> Stashed changes
@@ -5017,6 +5021,7 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!114 &8200425390549911959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5067,6 +5072,8 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 --- !u!143 &-8552850515612750159
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5110,16 +5117,22 @@ MonoBehaviour:
   monsterLayer:
     serializedVersion: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Bits: 0
   animator: {fileID: 7815685704151697461}
   attackRange: 5
   attackCooldown: 1
 --- !u!114 &8950218930708255970
 =======
+=======
+>>>>>>> Stashed changes
     m_Bits: 256
   detectionRange: 10
   rotationSpeed: 10
 --- !u!114 &8200425390549911959
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5133,7 +5146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   characterName: "\uAE30\uBCF8 \uCE90\uB9AD\uD130"
+=======
+  characterName: knightPlayer
+>>>>>>> Stashed changes
 =======
   characterName: knightPlayer
 >>>>>>> Stashed changes
@@ -5142,6 +5159,10 @@ MonoBehaviour:
   attackPower: 10
   moveSpeed: 5
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+  inGamePrefab: {fileID: 0}
+>>>>>>> Stashed changes
 =======
   inGamePrefab: {fileID: 0}
 >>>>>>> Stashed changes

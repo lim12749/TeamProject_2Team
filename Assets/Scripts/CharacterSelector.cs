@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,10 +28,24 @@ public class CharacterSelector : MonoBehaviour
     public float selectedScale = 1.2f;       // ¼±ÅÃ Å©±â
     public float transitionSpeed = 5f;       // º¯È­ ¼Óµµ
 
+=======
+using UnityEngine;
+
+public class CharacterSelector : MonoBehaviour
+{
+    public Renderer floorRenderer;      // ¹Ù´ÚÀÇ Renderer
+    public Color normalColor = Color.white;  // ±âº» »ö
+    public Color selectedColor = Color.red;  // ¼±ÅÃ »ö
+    public float normalScale = 1f;           // ±âº» Å©±â
+    public float selectedScale = 1.2f;       // ¼±ÅÃ Å©±â
+    public float transitionSpeed = 5f;       // º¯È­ ¼Óµµ
+
+>>>>>>> Stashed changes
     [Header("ÀÌ Ä³¸¯ÅÍÀÇ °ÔÀÓ ³» ¼ÒÈ¯ ÇÁ¸®ÆÕ")]
     public GameObject inGamePrefab; // CharacterStats.inGamePrefab ´ë½Å Á÷Á¢ ÂüÁ¶ °¡´ÉÇÏµµ·Ï ³ëÃâ
 
     private bool isSelected = false;
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     private Vector3 targetScale;
 
@@ -95,6 +110,12 @@ public class CharacterSelector : MonoBehaviour
 
 =======
 >>>>>>> Stashed changes
+=======
+    private Vector3 targetScale;
+
+    void Start()
+    {
+>>>>>>> Stashed changes
         if (floorRenderer != null)
         {
             // ëŸ°íƒ€ì„ì— ì”¬ ì˜¤ë¸Œì íŠ¸ë¼ë©´ .material ì•ˆì „, ì—ë””í„°ì—ì„œë§Œ sharedMaterial
@@ -112,6 +133,7 @@ public class CharacterSelector : MonoBehaviour
         targetScale = Vector3.one * normalScale;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     public void OnDeselect()
     {
@@ -161,6 +183,32 @@ public class CharacterSelector : MonoBehaviour
         }
 >>>>>>> Stashed changes
 
+=======
+    void Update()
+    {
+        // ºÎµå·´°Ô Å©±â º¯È­
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * transitionSpeed);
+    }
+
+    void OnMouseDown()
+    {
+        // CharacterSelectionManagerÀÇ ½Ì±ÛÅÏ ÀÎ½ºÅÏ½º¸¦ »ç¿ë
+        var manager = CharacterSelectionManager.Instance;
+        if (manager != null)
+            manager.SelectCharacter(this);
+    }
+
+    public void SetSelected(bool selected)
+    {
+        isSelected = selected;
+
+        if (floorRenderer != null)
+        {
+            // material Á¢±Ù ½Ã ÀÎ½ºÅÏ½º°¡ »ı¼ºµÇ¹Ç·Î ÁÖÀÇ. ¿©±â¼± °£´ÜÈ÷ º¯°æ.
+            floorRenderer.material.color = isSelected ? selectedColor : normalColor;
+        }
+
+>>>>>>> Stashed changes
         targetScale = Vector3.one * (isSelected ? selectedScale : normalScale);
     }
 }

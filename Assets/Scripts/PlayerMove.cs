@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMove : MonoBehaviour
 {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static PlayerMove Instanse { get; private set; }
     public LayerMask groundLayer; // ÌÅ¥Î¶≠ Í∞ÄÎä•Ìïú Î∞îÎã• Î†àÏù¥Ïñ¥
     public LayerMask monsterLayer; // Î™¨Ïä§ÌÑ∞ Î†àÏù¥Ïñ¥ Ï∂îÍ∞Ä
@@ -12,10 +13,15 @@ public class PlayerMove : MonoBehaviour
     [Header("ÔøΩŸ¥ÔøΩ ÔøΩÔøΩÔøΩÃæÔøΩ")]
     public LayerMask groundLayer;
 =======
+=======
+>>>>>>> Stashed changes
     public LayerMask groundLayer;
     public LayerMask monsterLayer;
     public float detectionRange = 10f;
     public float rotationSpeed = 10f;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     private CharacterController controller;
@@ -49,6 +55,21 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         stats = GetComponent<CharacterStats>();
         shooting = GetComponent<PlayerShooting>();
+<<<<<<< Updated upstream
+=======
+
+        // RuntimeManager∞° ¿÷¿∏∏È ¡ﬂæ” º≥¡§∞™¿∏∑Œ √ ±‚»≠ («¡∑Œ¡ß∆Æ ¿¸ø™ ≈Î¡¶)
+        if (RuntimeManager.Instance != null)
+        {
+            groundLayer = RuntimeManager.Instance.GetGroundLayer();
+            monsterLayer = RuntimeManager.Instance.GetMonsterLayer();
+            detectionRange = RuntimeManager.Instance.GetDetectionRange();
+            rotationSpeed = RuntimeManager.Instance.GetRotationSpeed();
+
+            if (stats != null)
+                stats.moveSpeed = RuntimeManager.Instance.GetPlayerMoveSpeed();
+        }
+>>>>>>> Stashed changes
 
         // RuntimeManager∞° ¿÷¿∏∏È ¡ﬂæ” º≥¡§∞™¿∏∑Œ √ ±‚»≠ («¡∑Œ¡ß∆Æ ¿¸ø™ ≈Î¡¶)
         if (RuntimeManager.Instance != null)
@@ -87,7 +108,11 @@ public class PlayerMove : MonoBehaviour
         HandleMouseInput();
         MoveToTarget();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         ApplyGravity();
+=======
+        ShootIfMonsterInRange();
+>>>>>>> Stashed changes
 =======
         ShootIfMonsterInRange();
 >>>>>>> Stashed changes
@@ -103,8 +128,12 @@ public class PlayerMove : MonoBehaviour
                 targetPosition = hit.point;
                 isMoving = true;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 animator.SetBool("isMoving", true);
                 currentTarget = null; // ÏàòÎèô Ïù¥Îèô Ïãú ÏûêÎèô Í≥µÍ≤© Ìï¥Ï†ú
+=======
+                if (animator != null) animator.SetBool("isMoving", true);
+>>>>>>> Stashed changes
 =======
                 if (animator != null) animator.SetBool("isMoving", true);
 >>>>>>> Stashed changes
@@ -113,7 +142,10 @@ public class PlayerMove : MonoBehaviour
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     // 10f ∞≈∏Æ ≥ª ∞°¿Â ∞°±ÓøÓ ∏ÛΩ∫≈Õ∏¶ πŸ∂Û∫Ω (∫Ò¡÷«‡Ω√ø°µµ µø¿€ ∞°¥…)
     void LookAtNearestMonster()
     {
@@ -212,11 +244,55 @@ public class PlayerMove : MonoBehaviour
             else
             {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
 
                 // üí• Î¨∏Ï†ú ÏúÑÏπò
                 Vector3 move = direction.normalized * stats.moveSpeed;
+=======
+                // ¡÷∫Ø ∏ÛΩ∫≈Õ ≈Ωªˆ
+                Collider[] monsters = Physics.OverlapSphere(transform.position, detectionRange, monsterLayer);
+                Transform lookTarget = null;
+
+                if (monsters.Length > 0)
+                {
+                    // ∞°¿Â ∞°±ÓøÓ ∏ÛΩ∫≈Õ √£±‚
+                    lookTarget = monsters[0].transform;
+                    float minDist = Vector3.Distance(transform.position, lookTarget.position);
+                    foreach (var m in monsters)
+                    {
+                        float dist = Vector3.Distance(transform.position, m.transform.position);
+                        if (dist < minDist)
+                        {
+                            lookTarget = m.transform;
+                            minDist = dist;
+                        }
+                    }
+                }
+
+                // »∏¿¸ √≥∏Æ: ∏ÛΩ∫≈Õ∞° ¿÷¿∏∏È ∏ÛΩ∫≈Õ πÊ«‚, æ¯¿∏∏È ¿Ãµø πÊ«‚
+                Vector3 lookDir;
+                if (lookTarget != null)
+                {
+                    lookDir = lookTarget.position - transform.position;
+                    lookDir.y = 0f;
+                }
+                else
+                {
+                    lookDir = direction;
+                }
+
+                if (lookDir.sqrMagnitude > 0.01f)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                }
+
+                // ¿Ãµø √≥∏Æ
+                float moveSpeed = stats != null ? stats.moveSpeed : 0f;
+                Vector3 move = direction.normalized * moveSpeed;
+>>>>>>> Stashed changes
 =======
                 // ¡÷∫Ø ∏ÛΩ∫≈Õ ≈Ωªˆ
                 Collider[] monsters = Physics.OverlapSphere(transform.position, detectionRange, monsterLayer);
@@ -267,6 +343,7 @@ public class PlayerMove : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
     void DetectMonster()
@@ -329,6 +406,8 @@ public class PlayerMove : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 =======
+=======
+>>>>>>> Stashed changes
     void ShootIfMonsterInRange()
     {
         if (shooting == null) return;
@@ -340,5 +419,8 @@ public class PlayerMove : MonoBehaviour
             shooting.TryShoot();
         }
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

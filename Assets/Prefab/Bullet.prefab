@@ -35,6 +35,9 @@ Transform:
 =======
   m_LocalPosition: {x: 4.8592267, y: 6.4764357, z: 19.459057}
   m_LocalScale: {x: 30, y: 30, z: 30}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_ConstrainProportionsScale: 1
   m_Children: []

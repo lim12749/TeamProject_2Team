@@ -924,8 +924,11 @@ GameObject:
   - component: {fileID: 7050542570285871734}
   - component: {fileID: -4618510065581182872}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - component: {fileID: -1873492260837014146}
 =======
+=======
+>>>>>>> Stashed changes
   - component: {fileID: 4571448195951409445}
 >>>>>>> Stashed changes
   m_Layer: 6
@@ -980,6 +983,7 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!114 &3226954372177035523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,6 +1022,8 @@ MonoBehaviour:
   selectedScale: 1.2
   transitionSpeed: 5
   animator: {fileID: 3186365682307997882}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!143 &7050542570285871734
@@ -1073,6 +1079,9 @@ MonoBehaviour:
   detectionRange: 10
   rotationSpeed: 10
 --- !u!114 &4571448195951409445
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,6 +1092,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -1092,6 +1102,8 @@ MonoBehaviour:
   attackPower: 10
   moveSpeed: 5
 =======
+=======
+>>>>>>> Stashed changes
   m_Script: {fileID: 11500000, guid: def76936aca842a48a42f5265ae16673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
