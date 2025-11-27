@@ -394,14 +394,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 2265047351262901915}
   - component: {fileID: 2830889712051484253}
   - component: {fileID: 2499099742708460825}
   - component: {fileID: 5473375729678270727}
   - component: {fileID: -7325095173862768682}
+=======
+  - component: {fileID: 7623702766363555240}
+  - component: {fileID: 6657041122001108927}
+  - component: {fileID: 5432102688249292332}
+  - component: {fileID: -1058511265142236737}
+  - component: {fileID: 9119739048435785193}
+  - component: {fileID: 1865571866953027663}
+>>>>>>> Stashed changes
   m_Layer: 8
   m_Name: SlimePBR
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -509,7 +518,46 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+<<<<<<< Updated upstream
 --- !u!1 &9156139407761487468
+=======
+--- !u!135 &9119739048435785193
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517555400724908632}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1865571866953027663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517555400724908632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cd0308fa6037748ab7b60e50449007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  expReward: 20
+--- !u!1 &7174315621206805164
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

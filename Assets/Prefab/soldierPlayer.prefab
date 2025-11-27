@@ -921,11 +921,13 @@ GameObject:
 <<<<<<< Updated upstream
   - component: {fileID: 2240519980328477177}
   - component: {fileID: 3186365682307997882}
-  - component: {fileID: 3226954372177035523}
-  - component: {fileID: 1885123116662185193}
   - component: {fileID: 7050542570285871734}
   - component: {fileID: -4618510065581182872}
+<<<<<<< Updated upstream
   - component: {fileID: -1873492260837014146}
+=======
+  - component: {fileID: 4571448195951409445}
+>>>>>>> Stashed changes
   m_Layer: 6
   m_Name: soldierPlayer
   m_TagString: Untagged
@@ -977,6 +979,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+<<<<<<< Updated upstream
 --- !u!114 &3226954372177035523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,6 +1018,8 @@ MonoBehaviour:
   selectedScale: 1.2
   transitionSpeed: 5
   animator: {fileID: 3186365682307997882}
+=======
+>>>>>>> Stashed changes
 --- !u!143 &7050542570285871734
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1057,11 +1062,18 @@ MonoBehaviour:
     m_Bits: 128
   monsterLayer:
     serializedVersion: 2
+<<<<<<< Updated upstream
     m_Bits: 0
   animator: {fileID: 3186365682307997882}
   attackRange: 10
   attackCooldown: 1
 --- !u!114 &-1873492260837014146
+=======
+    m_Bits: 256
+  detectionRange: 10
+  rotationSpeed: 10
+--- !u!114 &4571448195951409445
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1070,6 +1082,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3248292635177255770}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -1078,6 +1091,14 @@ MonoBehaviour:
   maxHealth: 100
   attackPower: 10
   moveSpeed: 5
+=======
+  m_Script: {fileID: 11500000, guid: def76936aca842a48a42f5265ae16673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 2837298174031751973}
+  bulletPrefab: {fileID: 7873355107125710730, guid: 6582672235e31404785dd9b29cf3b407, type: 3}
+  fireRate: 0.3
+>>>>>>> Stashed changes
 --- !u!1 &3645428842138737178
 GameObject:
   m_ObjectHideFlags: 0

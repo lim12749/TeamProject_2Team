@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,11 +15,28 @@ public class CharacterSelector : MonoBehaviour
     public float transitionSpeed = 5f;
 
     private Animator animator;
+=======
+using UnityEngine;
+
+public class CharacterSelector : MonoBehaviour
+{
+    public Renderer floorRenderer;      // ¹Ù´ÚÀÇ Renderer
+    public Color normalColor = Color.white;  // ±âº» »ö
+    public Color selectedColor = Color.red;  // ¼±ÅÃ »ö
+    public float normalScale = 1f;           // ±âº» Å©±â
+    public float selectedScale = 1.2f;       // ¼±ÅÃ Å©±â
+    public float transitionSpeed = 5f;       // º¯È­ ¼Óµµ
+
+    [Header("ÀÌ Ä³¸¯ÅÍÀÇ °ÔÀÓ ³» ¼ÒÈ¯ ÇÁ¸®ÆÕ")]
+    public GameObject inGamePrefab; // CharacterStats.inGamePrefab ´ë½Å Á÷Á¢ ÂüÁ¶ °¡´ÉÇÏµµ·Ï ³ëÃâ
+
+    private bool isSelected = false;
+>>>>>>> Stashed changes
     private Vector3 targetScale;
-    private Camera mainCam;
 
     void Awake()
     {
+<<<<<<< Updated upstream
         mainCam = Camera.main;
         targetScale = Vector3.one * normalScale;
         // animatorë¥¼ ìê¸° ìì‹  ë˜ëŠ” ìì‹ì—ì„œ ìë™ìœ¼ë¡œ ì°¾ìŒ
@@ -75,6 +93,8 @@ public class CharacterSelector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainGameScene")
             return;
 
+=======
+>>>>>>> Stashed changes
         if (floorRenderer != null)
         {
             // ëŸ°íƒ€ì„ì— ì”¬ ì˜¤ë¸Œì íŠ¸ë¼ë©´ .material ì•ˆì „, ì—ë””í„°ì—ì„œë§Œ sharedMaterial
@@ -92,6 +112,7 @@ public class CharacterSelector : MonoBehaviour
         targetScale = Vector3.one * normalScale;
     }
 
+<<<<<<< Updated upstream
     public void OnDeselect()
     {
         SafeDeselect();
@@ -114,7 +135,32 @@ public class CharacterSelector : MonoBehaviour
             animator.SetBool("isMoving", true);
 
         animator.SetBool("isMoving", true);
+=======
+    void Update()
+    {
+        // ºÎµå·´°Ô Å©±â º¯È­
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.deltaTime * transitionSpeed);
+    }
 
-        targetScale = Vector3.one * selectedScale;
+    void OnMouseDown()
+    {
+        // CharacterSelectionManagerÀÇ ½Ì±ÛÅÏ ÀÎ½ºÅÏ½º¸¦ »ç¿ë
+        var manager = CharacterSelectionManager.Instance;
+        if (manager != null)
+            manager.SelectCharacter(this);
+    }
+
+    public void SetSelected(bool selected)
+    {
+        isSelected = selected;
+
+        if (floorRenderer != null)
+        {
+            // material Á¢±Ù ½Ã ÀÎ½ºÅÏ½º°¡ »ı¼ºµÇ¹Ç·Î ÁÖÀÇ. ¿©±â¼± °£´ÜÈ÷ º¯°æ.
+            floorRenderer.material.color = isSelected ? selectedColor : normalColor;
+        }
+>>>>>>> Stashed changes
+
+        targetScale = Vector3.one * (isSelected ? selectedScale : normalScale);
     }
 }

@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public float speed = 20f;      // 총알 속도
     public float lifetime = 3f;    // 몇 초 뒤에 자동 삭제
     public float damage = 10f;     // 공격력
+=======
+    public float speed = 20f;
+    public float lifeTime = 0.5f;
+    public int damage = 10;
+>>>>>>> Stashed changes
 
     private void Start()
     {
@@ -18,8 +24,16 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+<<<<<<< Updated upstream
         // "Monster" 레이어 번호 가져오기
         int monsterLayer = LayerMask.NameToLayer("Monster");
+=======
+        if (other.CompareTag("Monster"))
+        {
+            MonsterHealth mh = other.GetComponent<MonsterHealth>();
+            if (mh != null)
+                mh.TakeDamage(damage);
+>>>>>>> Stashed changes
 
         // 충돌한 오브젝트가 몬스터 레이어에 속하면 실행
         if (other.gameObject.layer == monsterLayer)

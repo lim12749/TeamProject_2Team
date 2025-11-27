@@ -5,10 +5,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+<<<<<<< Updated upstream
     public GameObject[] charPrefabs; // 0 = knight, 1 = soldier
     public GameObject Player { get; private set; }
+=======
+    public GameObject[] charPrefabs; // 예비 프리팹 배열 (옵션)
+    public GameObject Player;
+>>>>>>> Stashed changes
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -22,6 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -83,5 +89,67 @@ public class GameManager : MonoBehaviour
             Player.transform.localScale = Vector3.one;
         }
 
+=======
+    void Start()
+    {
+        GameObject prefabToSpawn = null;
+
+        // 우선 RuntimeManager의 선택된 프리팹 사용
+        if (RuntimeManager.Instance != null)
+        {
+            prefabToSpawn = RuntimeManager.Instance.GetSelectedCharacterPrefab();
+
+            // 참조가 없으면 selectedCharacterName(사용자 표시 이름 또는 프리팹 이름)을 이용해 검색
+            string selName = RuntimeManager.Instance.selectedCharacterName;
+            if (prefabToSpawn == null && !string.IsNullOrEmpty(selName))
+            {
+                // 1) 먼저 Resources에서 프리팹 자산 이름으로 시도
+                prefabToSpawn = Resources.Load<GameObject>(selName);
+                if (prefabToSpawn != null)
+                {
+                    Debug.Log($"GameManager: Resources에서 '{selName}' 이름으로 프리팹을 로드했습니다.");
+                }
+                else
+                {
+                    // 2) 실패하면 Resources의 모든 GameObject 프리팹을 검색하여
+                    //    CharacterStats.component.characterName 필드와 일치하는 것을 찾음
+                    var all = Resources.LoadAll<GameObject>("");
+                    foreach (var g in all)
+                    {
+                        if (g == null) continue;
+                        var stats = g.GetComponent<CharacterStats>();
+                        if (stats != null && stats.characterName == selName)
+                        {
+                            prefabToSpawn = g;
+                            Debug.Log($"GameManager: CharacterStats.characterName '{selName}' 으로 Resources에서 프리팹 '{g.name}'을 찾았습니다.");
+                            break;
+                        }
+                    }
+
+                    if (prefabToSpawn == null)
+                        Debug.LogWarning($"GameManager: Resources에서 '{selName}' 이름의 프리팹을 찾지 못했습니다.");
+                }
+            }
+        }
+
+        // 없으면 charPrefabs 배열의 첫 번째를 사용(백업)
+        if (prefabToSpawn == null && charPrefabs != null && charPrefabs.Length > 0)
+        {
+            prefabToSpawn = charPrefabs[0];
+            Debug.Log("GameManager: fallback charPrefabs[0] 사용");
+        }
+
+        if (prefabToSpawn != null)
+        {
+            Player = Instantiate(prefabToSpawn, Vector3.zero, Quaternion.identity);
+            Player.transform.SetParent(null);
+            Player.transform.localScale = Vector3.one;
+            Debug.Log($"GameManager: 플레이어 프리팹 '{prefabToSpawn.name}' 소환 완료.");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager: 소환할 캐릭터 프리팹이 없습니다. RuntimeManager 또는 charPrefabs 를 확인하세요.");
+        }
+>>>>>>> Stashed changes
     }
 }

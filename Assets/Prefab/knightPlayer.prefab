@@ -4924,11 +4924,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2072203389726655756}
   - component: {fileID: 7815685704151697461}
-  - component: {fileID: 8200425390549911959}
-  - component: {fileID: -7419194544524534554}
   - component: {fileID: -8552850515612750159}
   - component: {fileID: -3344620111965304663}
+<<<<<<< Updated upstream
   - component: {fileID: 8950218930708255970}
+=======
+  - component: {fileID: 8200425390549911959}
+>>>>>>> Stashed changes
   m_Layer: 6
   m_Name: knightPlayer
   m_TagString: Player
@@ -5014,6 +5016,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+<<<<<<< Updated upstream
 --- !u!114 &8200425390549911959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5062,6 +5065,8 @@ MonoBehaviour:
   normalScale: {x: 1.3, y: 1.3, z: 1.3}
   selectedScale: {x: 1.6, y: 1.6, z: 1.6}
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 --- !u!143 &-8552850515612750159
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5104,11 +5109,18 @@ MonoBehaviour:
     m_Bits: 128
   monsterLayer:
     serializedVersion: 2
+<<<<<<< Updated upstream
     m_Bits: 0
   animator: {fileID: 7815685704151697461}
   attackRange: 5
   attackCooldown: 1
 --- !u!114 &8950218930708255970
+=======
+    m_Bits: 256
+  detectionRange: 10
+  rotationSpeed: 10
+--- !u!114 &8200425390549911959
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5120,11 +5132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   characterName: "\uAE30\uBCF8 \uCE90\uB9AD\uD130"
+=======
+  characterName: knightPlayer
+>>>>>>> Stashed changes
   portrait: {fileID: 0}
   maxHealth: 100
   attackPower: 10
   moveSpeed: 5
+<<<<<<< Updated upstream
+=======
+  inGamePrefab: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1 &3451990005710540044
 GameObject:
   m_ObjectHideFlags: 0
