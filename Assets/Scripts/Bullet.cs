@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-<<<<<<< Updated upstream
     public float speed = 20f;      // 총알 속도
     public float lifetime = 3f;    // 몇 초 뒤에 자동 삭제
-    public float damage = 10f;     // 공격력
-=======
-    public float speed = 20f;
-    public float lifeTime = 0.5f;
-    public int damage = 10;
->>>>>>> Stashed changes
+    public int damage = 10;     // 공격력
 
     private void Start()
     {
@@ -24,32 +18,30 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-<<<<<<< Updated upstream
         // "Monster" 레이어 번호 가져오기
         int monsterLayer = LayerMask.NameToLayer("Monster");
-=======
         if (other.CompareTag("Monster"))
         {
             MonsterHealth mh = other.GetComponent<MonsterHealth>();
             if (mh != null)
                 mh.TakeDamage(damage);
->>>>>>> Stashed changes
 
-        // 충돌한 오브젝트가 몬스터 레이어에 속하면 실행
-        if (other.gameObject.layer == monsterLayer)
-        {
-            Debug.Log($"{other.name} 피격! 데미지: {damage}");
-
-            // 몬스터 스크립트가 있다면 데미지 주기
-            Monster monster = other.GetComponent<Monster>();
-            if (monster != null)
+            // 충돌한 오브젝트가 몬스터 레이어에 속하면 실행
+            if (other.gameObject.layer == monsterLayer)
             {
-                monster.TakeDamage(damage);
+                Debug.Log($"{other.name} 피격! 데미지: {damage}");
+
+                // 몬스터 스크립트가 있다면 데미지 주기
+                Monster monster = other.GetComponent<Monster>();
+                if (monster != null)
+                {
+                    monster.TakeDamage(damage);
+                }
+
+                // 총알 제거
+                Destroy(gameObject);
             }
-
-            // 총알 제거
-            Destroy(gameObject);
         }
-    }
 
+    }
 }
