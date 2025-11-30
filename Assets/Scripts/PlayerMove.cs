@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
 
     private CharacterController controller;
     public Animator animator;
-    private CharacterStats stats;
+    private characterStats stats;
     private PlayerShooting shooting;
 
     private Vector3 targetPosition;
@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        stats = GetComponent<CharacterStats>();
+        stats = GetComponent<characterStats>();
         shooting = GetComponent<PlayerShooting>();
 
         // RuntimeManager가 있으면 중앙 설정 참조

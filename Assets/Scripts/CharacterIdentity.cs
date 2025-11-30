@@ -1,13 +1,17 @@
 using UnityEngine;
 
-[DisallowMultipleComponent]
 public class CharacterIdentity : MonoBehaviour
 {
-    public int associatedPlatformIndex;  // 이 캐릭터와 연관된 발판의 인덱스
+    public int associatedPlatformIndex;
 
     void OnMouseDown()
     {
-        // 캐릭터 선택 시, CharacterSelectionManager에 발판 인덱스를 전달
+        if (CharacterSelectionManager.Instance == null)
+            return;
+
+        if (CharacterSelectionManager.Instance.platforms == null)
+            return;
+
         CharacterSelectionManager.Instance.SelectPlatform(associatedPlatformIndex);
     }
 }

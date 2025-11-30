@@ -18,10 +18,10 @@ public class PlayerExperience : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainGameScene")
         {
             if (expBar == null)
-                expBar = GameObject.Find("Canvas/backgroundHalfCustom/ex")?.GetComponent<Slider>();
+                expBar = GameObject.Find("PlayerUI/backgroundHalfCustom/ex")?.GetComponent<Slider>();
 
             if (levelText == null)
-                levelText = GameObject.Find("Canvas/level/level(TMP)")?.GetComponent<TextMeshProUGUI>();
+                levelText = GameObject.Find("PlayerUI/level/level(TMP)")?.GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -39,6 +39,7 @@ public class PlayerExperience : MonoBehaviour
         {
             currentExp -= expToNextLevel;
             LevelUp();
+            LevelUpUIManager.instance.ShowLevelUpUI();
         }
 
         UpdateUI();

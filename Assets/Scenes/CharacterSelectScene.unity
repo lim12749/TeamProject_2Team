@@ -1405,6 +1405,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3438521048858770538, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8200425390549911959, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
       propertyPath: inGamePrefab
       value: 

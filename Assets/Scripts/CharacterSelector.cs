@@ -9,13 +9,21 @@ public class CharacterSelector : MonoBehaviour
     public float selectedScale = 1.2f;       // 선택 크기
     public float transitionSpeed = 5f;       // 변화 속도
 
-    private bool isSelected = false;
     private Vector3 targetScale;
 
     void Awake()
     {
+        // Renderer가 할당되지 않았으면 찾아서 할당
+        if (floorRenderer == null)
+        {
+            floorRenderer = GetComponent<Renderer>();
+        }
+
+        // floorRenderer가 null이 아닌 경우 색상 설정
         if (floorRenderer != null)
+        {
             floorRenderer.material.color = normalColor;
+        }
 
         targetScale = normalScale;
     }
@@ -30,12 +38,22 @@ public class CharacterSelector : MonoBehaviour
     public void SetSelected()
     {
         if (floorRenderer != null)
+        {
+            // 'new Material()'을 사용하여 각 객체에 대해 독립적인 재질을 생성
+            floorRenderer.material = new Material(floorRenderer.material);
             floorRenderer.material.color = selectedColor;
+            targetScale = normalScale * selectedScale;
+        }
     }
 
     public void resetSelected()
     {
         if (floorRenderer != null)
+        {
+            // 'new Material()'을 사용하여 원본 재질을 변경
+            floorRenderer.material = new Material(floorRenderer.material);
             floorRenderer.material.color = normalColor;
+            targetScale = normalScale;
+        }
     }
 }

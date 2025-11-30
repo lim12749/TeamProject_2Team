@@ -16,50 +16,65 @@ public class Monster : MonoBehaviour
     [Header("애니메이터")]
     public Animator animator;
 
+    [Header("플레이어 공격")]
+    public int damageToPlayer = 10;
+    public float attackDistance = 1.5f;
+    public float attackCooldown = 1.0f;
+
+    private float lastAttackTime = 0f;
+
     private Transform playerTransform;
     private bool isDead = false;
 
     void Start()
     {
-        // 중앙 매니저가 있으면 기본값 적용
         if (MonsterManager.Instance != null)
             MonsterManager.Instance.ApplyDefaults(this);
 
-        // MonsterHealth 컴포넌트가 있으면 그쪽을 우선 사용
-        var mh = GetComponent<MonsterHealth>();
-        if (mh != null)
-        {
-            // MonsterHealth 내부에서 currentHealth를 관리하므로 동기화는 필요 없음
-            // mh.maxHealth 값이 이미 설정되어 있을 것임
-        }
-        else
-        {
-            // Monster 자체에서 체력을 관리
-            currentHealth = maxHealth;
-        }
+        currentHealth = maxHealth;
 
-        // 플레이어 찾기
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             playerTransform = player.transform;
         else
-        {
             Debug.LogWarning($"[{name}] 플레이어를 찾을 수 없습니다. 'Player' 태그를 확인하세요.");
-            // 플레이어가 반드시 필요한 행동이면 스크립트를 disable
-            // 여기서는 이동 로직에서 null 체크하므로 계속 둠
-        }
 
-        // 등록(매니저가 존재하면)
         MonsterManager.Instance?.RegisterMonster(this);
     }
 
     void Update()
     {
-        if (isDead) return;
-        if (playerTransform == null) return;
+        if (isDead || playerTransform == null) return;
 
-        MoveTowardPlayer();
+        Vector3 dir = playerTransform.position - transform.position;
+        dir.y = 0;
+
+        if (dir.sqrMagnitude > attackDistance * attackDistance)
+            MoveTowardPlayer();
+        else
+            TryAttackPlayer();
     }
+
+    void TryAttackPlayer()
+    {
+        if (Time.time - lastAttackTime < attackCooldown)
+            return;
+
+        lastAttackTime = Time.time;
+
+        var playerStats = playerTransform.GetComponent<characterStats>();
+        if (playerStats != null)
+        {
+            playerStats.TakeDamage(damageToPlayer);
+            Debug.Log($"{name}가 플레이어에게 {damageToPlayer} 피해를 입힘.");
+        }
+
+        if (animator != null)
+            animator.SetTrigger("Attack");
+    }
+
+
+
 
     void MoveTowardPlayer()
     {
@@ -113,8 +128,7 @@ public class Monster : MonoBehaviour
         // 매니저에서 등록 해제
         MonsterManager.Instance?.UnregisterMonster(this);
 
-        // 제거(애니메이션 재생 시간을 고려해 지연)
-        Destroy(gameObject, 2f);
+        Destroy(gameObject);
     }
 
     void OnDestroy()
