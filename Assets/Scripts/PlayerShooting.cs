@@ -2,25 +2,21 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public Transform firePoint;     // 총알 나가는 위치
-    public GameObject bulletPrefab; // 총알 프리팹
-    public float fireRate = 0.3f;   // 발사 간격
+    public Transform firePoint;     
+    public GameObject bulletPrefab; 
+    public float fireRate = 0.3f;   
 
     private float nextFireTime = 0f;
 
-    void Update()
+    void Start()
     {
-        if (Input.GetMouseButton(0)) // 마우스 좌클릭 누르고 있으면
+        if (RuntimeManager.Instance != null)
         {
-            if (Time.time >= nextFireTime)
-            {
-                Shoot();
-                nextFireTime = Time.time + fireRate;
-            }
+            fireRate = RuntimeManager.Instance.fireRate;
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         if (firePoint == null || bulletPrefab == null)
         {
@@ -28,7 +24,22 @@ public class PlayerShooting : MonoBehaviour
             return;
         }
 
-        // 총알 생성
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    public bool TryShoot()
+    {
+        float effectiveFireRate = fireRate;
+        if (RuntimeManager.Instance != null)
+            effectiveFireRate = RuntimeManager.Instance.fireRate;
+
+        if (Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + effectiveFireRate;
+            return true;
+        }
+
+        return false;
     }
 }

@@ -865,11 +865,11 @@ GameObject:
   - component: {fileID: 2240519980328477177}
   - component: {fileID: 3186365682307997882}
   - component: {fileID: 3226954372177035523}
-  - component: {fileID: 1885123116662185193}
   - component: {fileID: 7050542570285871734}
   - component: {fileID: -4618510065581182872}
   - component: {fileID: -5719402431951699430}
   - component: {fileID: 4571448195951409445}
+  - component: {fileID: 4900352975865176098}
   m_Layer: 6
   m_Name: soldierPlayer
   m_TagString: Player
@@ -885,8 +885,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248292635177255770}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0014795238, y: 0.70700216, z: -0.0013465808, w: 0.70720863}
-  m_LocalPosition: {x: -2.0071137, y: -0.000012040138, z: -0.043632176}
+  m_LocalRotation: {x: 0, y: 0.76604444, z: 0, w: 0.64278764}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -898,7 +898,7 @@ Transform:
   - {fileID: 5543622853601843035}
   - {fileID: 1018779298812688300}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.011, y: 89.983, z: -0.229}
+  m_LocalEulerAnglesHint: {x: 0, y: 100, z: 0}
 --- !u!95 &3186365682307997882
 Animator:
   serializedVersion: 7
@@ -933,33 +933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56c7d389646bb744b833304ebc94e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: soldierPlayer
-  portrait: {fileID: 0}
   maxHealth: 100
   attackPower: 10
   moveSpeed: 5
---- !u!114 &1885123116662185193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3248292635177255770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680a0a42a017ccb46bbea94961fed2f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chars:
-  - {fileID: 1885123116662185193}
-  - {fileID: -7419194544524534554, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
-  character: 1
-  floorRenderer: {fileID: 4865736290420895990, guid: f8569c8e6fa41fa478107c2533669598, type: 3}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedColor: {r: 1, g: 0, b: 0, a: 1}
-  normalScale: 1
-  selectedScale: 1.2
-  transitionSpeed: 5
 --- !u!143 &7050542570285871734
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1005,6 +981,9 @@ MonoBehaviour:
     m_Bits: 256
   detectionRange: 10
   rotationSpeed: 10
+  animator: {fileID: 3186365682307997882}
+  attackRange: 10
+  attackCooldown: 1
 --- !u!114 &-5719402431951699430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1016,19 @@ MonoBehaviour:
   firePoint: {fileID: 2837298174031751973}
   bulletPrefab: {fileID: 7873355107125710730, guid: 6582672235e31404785dd9b29cf3b407, type: 3}
   fireRate: 0.3
+--- !u!114 &4900352975865176098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248292635177255770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4939917e8878c14aac5b4a4454aa119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterIdentity
+  associatedPlatformIndex: 1
 --- !u!1 &3645428842138737178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1119,7 @@ Transform:
   m_GameObject: {fileID: 3718424739826600434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11932.9, y: 10002, z: 5847}
+  m_LocalPosition: {x: 11840.3, y: 9927, z: 5891.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
