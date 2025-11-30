@@ -5100,8 +5100,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.81915206, z: 0, w: 0.57357645}
   m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4756191134687364485}
   - {fileID: 7884875698067845940}
@@ -5156,7 +5156,7 @@ Animator:
   m_GameObject: {fileID: 3438521048858770538}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3955de6a24970f840996fe77051507ee, type: 3}
-  m_Controller: {fileID: 9100000, guid: c993aff8e2e9c1446972746892a7166c, type: 2}
+  m_Controller: {fileID: 9100000, guid: c8f439285b005ec41ab5633b3f3c8d9e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5185,7 +5185,7 @@ MonoBehaviour:
   maxHealth: 100
   attackPower: 10
   moveSpeed: 5
-  inGamePrefab: {fileID: 0}
+  inGamePrefab: {fileID: 3438521048858770538}
 --- !u!114 &-7419194544524534554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,7 +5199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterIndex: 0
-  floorRenderer: {fileID: 0}
+  floorRenderer: {fileID: 5372795486612658126, guid: 87665182b2ac56b4aaef4cc2f5522d11, type: 3}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
   normalScale: 1
@@ -5207,7 +5207,7 @@ MonoBehaviour:
   transitionSpeed: 5
   inGamePrefab: {fileID: 0}
   chars:
-  - {fileID: 0}
+  - {fileID: 7756295911798696903, guid: c98043d57e0190845b790d7b92990bee, type: 3}
   - {fileID: -7419194544524534554}
 --- !u!143 &-8552850515612750159
 CharacterController:
@@ -5248,10 +5248,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   monsterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   detectionRange: 10
   rotationSpeed: 10
   animator: {fileID: 0}
