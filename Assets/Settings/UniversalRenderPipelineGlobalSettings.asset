@@ -60,6 +60,7 @@ MonoBehaviour:
       - rid: 2387664367270494212
       - rid: 2387664367270494213
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       - rid: 5640043374175846400
       - rid: 5640043374175846401
       - rid: 5640043374175846402
@@ -67,6 +68,11 @@ MonoBehaviour:
       - rid: 5640043436532826175
       - rid: 5640043436532826176
       - rid: 5640043436532826177
+>>>>>>> Stashed changes
+=======
+      - rid: 5640043436532826425
+      - rid: 5640043436532826426
+      - rid: 5640043436532826427
 >>>>>>> Stashed changes
     m_RuntimeSettings:
       m_List: []
@@ -198,6 +204,7 @@ MonoBehaviour:
         m_xrMirrorViewPS: {fileID: 4800000, guid: d5a307c014552314b9f560906d708772, type: 3}
         m_xrMotionVector: {fileID: 4800000, guid: f89aac1e4f84468418fe30e611dff395, type: 3}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - rid: 5640043374175846400
       type: {class: RenderingDebuggerRuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:
@@ -209,6 +216,13 @@ MonoBehaviour:
       data:
         m_version: 0
     - rid: 5640043436532826176
+>>>>>>> Stashed changes
+=======
+    - rid: 5640043436532826425
+      type: {class: RenderingDebuggerRuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
+      data:
+        m_version: 0
+    - rid: 5640043436532826426
 >>>>>>> Stashed changes
       type: {class: VrsRenderPipelineRuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:
@@ -237,9 +251,13 @@ MonoBehaviour:
           - {r: 0.5, g: 0.5, b: 0.5, a: 1}
           - {r: 0, g: 0, b: 1, a: 1}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - rid: 5640043374175846402
 =======
     - rid: 5640043436532826177
+>>>>>>> Stashed changes
+=======
+    - rid: 5640043436532826427
 >>>>>>> Stashed changes
       type: {class: LightmapSamplingSettings, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:
