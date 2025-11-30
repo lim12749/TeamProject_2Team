@@ -31,6 +31,7 @@ public class PlayerExperience : MonoBehaviour
 
     void LevelUp()
     {
+        Debug.Log("·¹º§¾÷");
         level++;
         expToNextLevel = Mathf.RoundToInt(expToNextLevel * 1.2f);
     }
