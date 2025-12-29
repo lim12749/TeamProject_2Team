@@ -4827,7 +4827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charPrefabs:
-  - {fileID: 3438521048858770538, guid: 1c445abc06d32e34e9608e8a162a8ed4, type: 3}
+  - {fileID: 3248292635177255770, guid: 7c1c5b7bba506f64681cd68dc576821a, type: 3}
   - {fileID: 3248292635177255770, guid: 7c1c5b7bba506f64681cd68dc576821a, type: 3}
 --- !u!4 &784525941
 Transform:
@@ -10748,7 +10748,7 @@ MonoBehaviour:
   monsterPrefabs:
   - {fileID: 6517555400724908632, guid: e4e1561297c3ae240b290497f436912d, type: 3}
   - {fileID: 5470069297621383532, guid: af2518564fda1f84a8bf5a29d3d235a6, type: 3}
-  spawnInterval: 5
+  spawnInterval: 15
   spawnRadius: 3
 --- !u!4 &1519217589
 Transform:

@@ -4,26 +4,21 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider))]
 public class MonsterHealth : MonoBehaviour
 {
-    public int maxHealth = 50;  
+    public int maxHealth = 50;  // monster max health
     private int currentHealth;
 
-    public int expReward = 20;  
+    public int expReward = 20;  // experience reward on death
 
     private Animator animator;
     private bool isDead = false;
 
     void Start()
     {
-        if (RuntimeManager.Instance != null)
-        {
-            maxHealth = RuntimeManager.Instance.GetMonsterMaxHealth();
-            expReward = RuntimeManager.Instance.GetMonsterExpReward();
-        }
-
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
     }
 
+    // called when hit by a bullet
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -36,6 +31,7 @@ public class MonsterHealth : MonoBehaviour
         }
         else
         {
+            // optional hit animation
             if (animator != null)
                 animator.SetTrigger("Hit");
         }
@@ -43,11 +39,14 @@ public class MonsterHealth : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;
         isDead = true;
 
+        // death animation (if any)
         if (animator != null)
             animator.SetTrigger("Die");
 
+        // award experience only in MainGameScene
         if (SceneManager.GetActiveScene().name == "MainGameScene")
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -59,6 +58,7 @@ public class MonsterHealth : MonoBehaviour
             }
         }
 
-        Destroy(gameObject, 1.5f);
+        // destroy monster immediately
+        Destroy(gameObject);
     }
 }

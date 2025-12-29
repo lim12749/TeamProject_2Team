@@ -29,20 +29,36 @@ public class SceneChange : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "GameOverScene")
+        {
+            Button btn1 = GameObject.Find("Button1")?.GetComponent<Button>();
+            Button btn2 = GameObject.Find("Button2")?.GetComponent<Button>();
+
+            if (btn1 != null)
+            {
+                btn1.onClick.RemoveAllListeners();
+                btn1.onClick.AddListener(GoToMainMenu);
+            }
+
+            if (btn2 != null)
+            {
+                btn2.onClick.RemoveAllListeners();
+                btn2.onClick.AddListener(QuitGame);
+            }
+
+            return;
+        }
+
+        // Other scenes: only one button
         targetButton = GameObject.Find("Button")?.GetComponent<Button>();
         if (targetButton != null)
         {
             targetButton.onClick.RemoveAllListeners();
-            targetButton.onClick.AddListener(OnMouseUpAsButton);
-            Debug.Log($"[{scene.name}] 버튼 이벤트 연결 완료!");
-        }
-        else
-        {
-            Debug.LogWarning($"[{scene.name}] 버튼을 찾을 수 없습니다.");
+            targetButton.onClick.AddListener(OnSingleButtonClick);
         }
     }
 
-    public void OnMouseUpAsButton()
+    public void OnSingleButtonClick()
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
@@ -54,5 +70,17 @@ public class SceneChange : MonoBehaviour
         {
             SceneManager.LoadScene("MainGameScene");
         }
+    }
+
+    // Button1 action → Go back to MainMenuScene
+    private void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
+    // Button2 action → Quit game
+    private void QuitGame()
+    {
+        Application.Quit();
     }
 }

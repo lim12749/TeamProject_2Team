@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -149,4 +150,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+        ResetGame();
+    }
+
+    private void ResetGame()
+    {
+        // 타이머 초기화
+        StopTimer();
+        elapsedTime = 0f;
+        ResetMonsterUpgradeTimer();
+
+        // MonsterManager 기본값 복원
+        if (MonsterManager.Instance != null)
+        {
+            MonsterManager.Instance.ResetDefaults();
+        }
+
+        // 몬스터 스포너 상태(스폰 인터벌 등) 리셋 시도
+        var spawners = FindObjectsOfType<MonsterSpawner>();
+        foreach (var spawner in spawners)
+        {
+            // 가능하면 스포너에 Reset 관련 메서드가 있는지 호출
+            var t = spawner.GetType();
+            var resetMethod = t.GetMethod("ResetSpawnInterval") ?? t.GetMethod("ResetInterval") ?? t.GetMethod("Reset");
+            if (resetMethod != null)
+            {
+                try { resetMethod.Invoke(spawner, null); }
+                catch (Exception ex) { Debug.LogWarning($"GameManager: spawner reset 호출 실패: {ex.Message}"); }
+            }
+        }
+
+        // 씬에 남아있는 몬스터들 제거 (초기화 목적)
+        var monsters = FindObjectsOfType<Monster>();
+        foreach (var m in monsters)
+        {
+            if (m != null)
+                Destroy(m.gameObject);
+        }
+
+        Debug.Log("GameManager: 게임 상태 초기화 완료.");
+    }
 }

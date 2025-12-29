@@ -10,6 +10,11 @@ public class MonsterManager : MonoBehaviour
     public float defaultMaxHealth = 100f;
     public int defaultExpReward = 10;
 
+    // 초기값 백업 (런타임에서 변경된 값을 리셋하기 위함)
+    private float initialDefaultMoveSpeed;
+    private float initialDefaultMaxHealth;
+    private int initialDefaultExpReward;
+
     // 활성 몬스터 추적(필요시 사용)
     private readonly List<Monster> activeMonsters = new List<Monster>();
 
@@ -19,6 +24,10 @@ public class MonsterManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            // 초기값 캐시
+            initialDefaultMoveSpeed = defaultMoveSpeed;
+            initialDefaultMaxHealth = defaultMaxHealth;
+            initialDefaultExpReward = defaultExpReward;
         }
         else if (Instance != this)
         {
@@ -49,7 +58,6 @@ public class MonsterManager : MonoBehaviour
         if (m.moveSpeed <= 0f)
             m.moveSpeed = defaultMoveSpeed;
 
-        // Monster가 MonsterHealth 컴포넌트를 가지고 있으면 그쪽 maxHealth를, 아니면 필드에 적용
         var mh = m.GetComponent<MonsterHealth>();
         if (mh != null)
         {
@@ -65,4 +73,21 @@ public class MonsterManager : MonoBehaviour
 
     // 활성 몬스터 목록 반환(읽기 전용)
     public IReadOnlyList<Monster> GetActiveMonsters() => activeMonsters.AsReadOnly();
+
+    // 런타임으로 변경된 기본값을 초기값으로 되돌림
+    public void ResetDefaults()
+    {
+        defaultMoveSpeed = initialDefaultMoveSpeed;
+        defaultMaxHealth = initialDefaultMaxHealth;
+        defaultExpReward = initialDefaultExpReward;
+
+        // 이미 존재하는 몬스터들에게도 기본값 재적용
+        foreach (var m in activeMonsters)
+        {
+            if (m != null)
+                ApplyDefaults(m);
+        }
+
+        Debug.Log("MonsterManager: 기본 스탯을 초기값으로 리셋했습니다.");
+    }
 }

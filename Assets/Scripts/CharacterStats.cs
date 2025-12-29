@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class characterStats : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class characterStats : MonoBehaviour
     private void Die()
     {
         Debug.Log($"{gameObject.name} »ç¸Á!");
-        // ÇÃ·¹ÀÌ¾î »ç¸Á Ã³¸®
+        SceneManager.LoadScene("GameOverScene");
     }
 
     public void AddHealth(int value)
