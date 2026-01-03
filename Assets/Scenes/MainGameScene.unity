@@ -9832,7 +9832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeType: 2
-  bonusValue: 0
+  bonusValue: 1
   characterStats: {fileID: 0}
   descriptionText: {fileID: 219936217}
 --- !u!224 &1319125968

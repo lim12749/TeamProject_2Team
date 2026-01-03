@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public Transform firePoint;     
-    public GameObject bulletPrefab; 
-    public float fireRate = 0.3f;   
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public float fireRate = 0.3f;
 
     private float nextFireTime = 0f;
 

@@ -48,7 +48,7 @@ public class LevelUpOption : MonoBehaviour
                     break;
                 case UpgradeType.MoveSpeed:
                     statName = "speed";
-                    valueText = "0.5"; // MoveSpeed는 항상 0.5 증가
+                    valueText = "1"; // MoveSpeed는 항상 1 증가
                     break;
             }
 
@@ -80,7 +80,7 @@ public class LevelUpOption : MonoBehaviour
                 break;
             case UpgradeType.MoveSpeed:
                 // MoveSpeed는 항상 0.5만큼 증가
-                characterStats.AddMoveSpeed(0.5f);
+                characterStats.AddMoveSpeed(1f);
                 break;
         }
     }
